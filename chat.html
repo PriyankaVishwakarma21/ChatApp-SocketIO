@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat </title>
+    <script >const roomName = "<%=room %>"</script>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <section class="chat_section">
+        <header class="brand">
+            <h1><i class="fas fa-smile"></i> ChatCord</h1>
+            <a href="/" class="btn">Leave Room</a>
+          </header>
+        <div class="brand">
+            <img src="" alt="img">
+            <h1>Chat</h1>
+        </div>
+         <div class="brand">
+            <h3><i class="fas fa-comments"></i> Room Name:</h3>
+            <h2 id="room-name">roomName</h2>
+          </div> 
+        <div class="message-area">
+           
+        </div>
+        <div>
+            <textarea name="" id="textarea" cols="30" rows="1" placeholder="Write here something..." >
+            </textarea>
+        </div>
+    </section>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qs/6.11.0/qs.min.js" 
+    integrity="sha512-/l6vieC+YxaZywUhmqs++8uF9DeMvJE61ua5g+UK0TuHZ4TkTgB1Gm1n0NiA86uEOM9JJ6JUwyR0hboKO0fCng==" 
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="/socket.io/socket.io.js" ></script>
+    <script src="/client.js" ></script>
+</body>
+</html>
