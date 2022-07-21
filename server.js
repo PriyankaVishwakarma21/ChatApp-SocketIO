@@ -21,21 +21,48 @@ app.get('/chat',(req,res)=>{
 })
 
 
+const users=[];
 
 // socket
 const io = require('socket.io')(http);
 io.on('connection',(socket)=>{
-    console.log("Connected....");
+    console.log("Connected...." , socket.id);
     
-    socket.on('message',(msg)=>{
-        //console.log|(msg);
-        socket.broadcast.emit('message',msg);
-    }) 
+    socket.on('joinroom',({id,username,room})=>{
+        socket.join(room,id);
+        users.push(id);
+        users[socket.id]=id;
+        console.log(users);
+        //console.log('joined the room',username,room);
+    })
+
+   
+    socket.on('message',(room,data)=>{
+       // console.log('client side msg',data);
+        socket.to(room).emit('message',data);
+        //console.log('send data from server',data);
+        //socket.to(socket.id).emit('message',data);
+    })
+
+    // socket.on('message',(msg)=>{
+    //     console.log(msg);
+    //     socket.broadcast.emit('message',msg);
+    // }) 
     
         //run when client disconnects
         socket.on('disconnect',()=>{
-            io.emit('message','A user has left the chat');
+            socket.emit('message',`A user left the chat`);
         }) 
+
+
+         // socket.on('user-connected',(room,name)=>{
+    //     users[name] =socket.id;
+    //     console.log('userconnected',name);
+    //     socket.emit('user-connected',name);
+    //     //socket.to(socket.id).emit('user-connected',name);
+    // })
+    
+
 
 })
 
